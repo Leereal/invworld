@@ -4,285 +4,289 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>{{ config('app.name', 'Pipsotrade') }}</title>
+    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+    <title>{{ config('app.name', 'Deriv-Invest') }}</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('app_assets/images/favicon.png')}}">
-    <!-- Pignose Calender -->
-    <link href="{{ asset('app_assets/plugins/pg-calendar/css/pignose.calendar.min.css')}}" rel="stylesheet">
-    <!-- Chartist -->
-    <link rel="stylesheet" href="{{ asset('app_assets/plugins/chartist/css/chartist.min.css')}}">
-    <link rel="stylesheet" href="{{ asset('app_assets/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css')}}">
-    <!-- Custom Stylesheet -->  
-    <link href="{{ asset('app_assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('app_assets/plugins/jquery-steps/css/jquery.steps.css')}}" rel="stylesheet">
+    <link rel="icon" type="image/image" sizes="16x16" href="{{ asset('assets/images/logo.png')}}">
+    <!-- Fonts and icons -->
+	<script src="{{ asset('assets/js/plugin/webfont/webfont.min.js')}}"></script>
+	<script>
+		WebFont.load({
+			google: {"families":["Open+Sans:300,400,600,700"]},
+			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands"], urls: ['../assets/css/fonts.css']},
+			active: function() {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+    <!-- CSS Files -->
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css')}}">   
 </head>
-
 <body>
+	<div class="wrapper">
+		<!--
+			Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
+		-->
+		<div class="main-header" data-background-color="orange">
+			<!-- Logo Header -->
+			<div class="logo-header">
+				
+				<a href="/home" class="logo">
+					<img src="{{ asset('assets/img/logoname.png')}}" alt="navbar brand" class="navbar-brand img-fluid">
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="fa fa-bars"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="fa fa-ellipsis-v"></i></button>
+				<div class="navbar-minimize">
+					<button class="btn btn-minimize btn-rounded">
+						<i class="fa fa-bars"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End Logo Header -->
 
-    <!--*******************
-        Preloader start
-    ********************-->
-    <div id="preloader">
-        <div class="loader">
-            <svg class="circular" viewBox="25 25 50 50">
-                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="3" stroke-miterlimit="10" />
-            </svg>
-        </div>
-    </div>
-    <!--*******************
-        Preloader end
-    ********************-->
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg">
+				
+				<div class="container-fluid">
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item dropdown hidden-caret">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+								<div class="avatar-sm">
+									<img src="{{ asset('assets/img/profile.png')}}" alt="..." class="avatar-img rounded-circle">
+								</div>
+							</a>
+							<ul class="dropdown-menu dropdown-user animated fadeIn">
+								<li>
+									<div class="user-box">
+										<div class="avatar-lg"><img src="{{ asset('assets/img/profile.png')}}" alt="image profile" class="avatar-img rounded"></div>
+										<div class="u-text">
+											<h4>{{Auth::user()->name}}</h4>
+											<p class="text-muted">{{Auth::user()->email}}</p><a href="/profile" class="btn btn-rounded btn-danger btn-sm">View Profile</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/profile">My Profile</a>
+									<a class="dropdown-item" href="/investments">My Balance</a>
+									<div class="dropdown-divider"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+									<a class="dropdown-item" href="{{ route('logout') }}" 
+                                    onclick="event.preventDefault();
+                                    this.closest('form').submit();">Logout</a>
+                                    </form>
+								</li>
+							</ul>
+						</li>
+						
+					</ul>
+				</div>
+			</nav>
+			<!-- End Navbar -->
+		</div>
 
-    
-    <!--**********************************
-        Main wrapper start
-    ***********************************-->
-    <div id="main-wrapper">
+		<!-- Sidebar -->
+		<div class="sidebar">			
+		    <div class="sidebar-background"></div>
+			<div class="sidebar-wrapper scrollbar-inner">
+				<div class="sidebar-content">
+					<div class="user">
+						<div class="avatar-sm float-left mr-2">
+							<img src="{{ asset('assets/img/profile.png')}}" alt="..." class="avatar-img rounded-circle">
+						</div>
+						<div class="info">
+							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									{{Auth::user()->username}}
+									<span class="user-level">{{Auth::user()->role}}</span>
+									<span class="caret"></span>
+								</span>
+							</a>
+							<div class="clearfix"></div>
 
-        <!--**********************************
-            Nav header start
-        ***********************************-->
-        <div class="nav-header">
-            <div class="brand-logo">
-                <a href="/home">
-                    <b class="logo-abbr"><img src="{{ asset('app_assets/images/logo.png')}}" alt=""> </b>
-                    <span class="logo-compact"><img src="{{ asset('app_assets/images/logo-compact.png')}}" alt=""></span>
-                    <span class="brand-title">
-                        <img src="{{ asset('app_assets/images/logo-compact.png')}}" width="150" alt="">
-                    </span>
-                </a>
-            </div>
-        </div>
-        <!--**********************************
-            Nav header end
-        ***********************************-->
-
-        <!--**********************************
-            Header start
-        ***********************************-->
-        <div class="header">    
-            <div class="header-content clearfix">
-                
-                <div class="nav-control">
-                    <div class="hamburger">
-                        <span class="toggle-icon"><i class="icon-menu"></i></span>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <ul class="clearfix">                       
-                        <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
-                                <span class="activity active"></span>
-                                <img src="{{ asset('app_assets/images/user/form-user.png')}}" height="40" width="40" alt="">
-                            </div>
-                            <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
-                                <div class="dropdown-content-body">
-                                    <ul>
-                                        <li>
-                                            <a href="/profile"><i class="icon-user"></i> <span>Profile</span></a>
-                                        </li>
-                                        <form method="POST" action="{{ route('logout') }}">
-                                            @csrf                                        
-                                        <li class="text-danger"><a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                            this.closest('form').submit();">
-                                            <i class="icon-key"></i>
-                                            <span class="text-danger">Logout</span></a>
-                                        </li>
-                                        </form>
-                                    </ul>
-                                </div>
-                            </div>
+							<div class="collapse in" id="collapseExample">
+								<ul class="nav">
+									<li>
+										<a href="/profile">
+											<span class="link-collapse">My Profile</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<ul class="nav">
+						<li class="nav-item active">
+							<a href="/home">
+								<i class="fas fa-home"></i>
+								<p>Dashboard</p>
+							</a>
+						</li>
+						<li class="nav-section">
+							<span class="sidebar-mini-icon">
+								<i class="fa fa-ellipsis-h"></i>
+							</span>
+							<h4 class="text-section">Menu</h4>
+						</li>
+						<li class="nav-item">
+							<a href="/select-deposit">
+								<i class="fas fa-plus-circle"></i>
+								<p>Deposit</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a data-toggle="collapse" href="#finance">
+								<i class="fas fa-money-bill-alt"></i>
+								<p>Finance</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="finance">
+								<ul class="nav nav-collapse">
+                                    <li>
+										<a href="/investments">
+											<span class="sub-item">Balances</span>
+										</a>
+									</li>
+									<li>
+										<a href="/investment-history">
+											<span class="sub-item">Deposits</span>
+										</a>
+									</li>
+                                    <li>
+										<a href="#">
+											<span class="sub-item">Withdrawals</span>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+                        <li class="nav-item">
+							<a href="/referrals">
+								<i class="fas fa-users"></i>
+								<p>Affiliates</p>
+							</a>
+						</li>
+                        <li class="nav-item">
+							<a href="/bonus">
+								<i class="fas fa-gift"></i>
+								<p>Bonus</p>
+							</a>
+						</li>
+						@if(Auth::user()->role=="Admin")
+							<li class="nav-section">
+								<span class="sidebar-mini-icon">
+									<i class="fa fa-ellipsis-h"></i>
+								</span>
+								<h4 class="text-section">Admin Section</h4>
+							</li>
+							<li class="nav-item">
+								<a href="/all-bonuses">
+									<i class="fas fa-gift"></i>
+									<p>Bonuses</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/all-investments">
+									<i class="fas fa-circle"></i>
+									<p>Investments</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/deposits">
+									<i class="fas fa-circle"></i>
+									<p>Deposits</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/withdrawals">
+									<i class="fas fa-circle"></i>
+									<p>Withdrawals</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/members">
+									<i class="fas fa-users"></i>
+									<p>Members</p>
+								</a>
+							</li>
+							<li class="nav-item">
+								<a href="/settings">
+									<i class="fas fa-cog"></i>
+									<p>Settings</p>
+								</a>
+							</li>
+						@endif
+                        <li class="nav-item">
+                            <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                this.closest('form').submit();" >
+                                    <i class="fas fa-sign-out-alt text-danger"></i>
+                                    <p class="text-danger">Logout</p>
+                                </a>
+                            </form> 
                         </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <!--**********************************
-            Header end ti-comment-alt
-        ***********************************-->
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- End Sidebar -->
 
-        <!--**********************************
-            Sidebar start
-        ***********************************-->
-        <div class="nk-sidebar">           
-            <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
-                    <li class="nav-label">{{Auth::user()->name}}</li>
-                    <li>
-                        <a href="/home" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/select-deposit" aria-expanded="false">
-                            <i class="icon-basket menu-icon"></i><span class="nav-text">Deposit</span>
-                        </a>
-                    </li>
-                    <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-wallet menu-icon"></i><span class="nav-text">Investments</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="/investments">Active</a></li>
-                            <li><a href="/investment-history">History</a></li> 
-                        </ul>
-                    </li>   
-                    <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-briefcase menu-icon"></i><span class="nav-text">Withdrawal</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="/comingsoon">Pending</a></li>
-                            <li><a href="/comingsoon">History</a></li> 
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="/referrals" aria-expanded="false">
-                            <i class="icon-people menu-icon"></i><span class="nav-text">Referrals</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/bonus" aria-expanded="false">
-                            <i class="icon-diamond menu-icon"></i><span class="nav-text">Bonus</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/profile" aria-expanded="false">
-                            <i class="icon-user menu-icon"></i><span class="nav-text">Profile</span>
-                        </a>
-                    </li>
-                    @if(Auth::user()->role=="Admin")
-                    <hr>
-                    <li>
-                        <a href="/all-bonuses" aria-expanded="false">
-                            <i class="icon-rocket menu-icon"></i><span class="nav-text">Bonuses</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/all-investments" aria-expanded="false">
-                            <i class="icon-rocket menu-icon"></i><span class="nav-text">Investments</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/deposits" aria-expanded="false">
-                            <i class="icon-rocket menu-icon"></i><span class="nav-text">Deposits</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/withdrawals" aria-expanded="false">
-                            <i class="icon-rocket menu-icon"></i><span class="nav-text">Withdrawals</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/members" aria-expanded="false">
-                            <i class="icon-rocket menu-icon"></i><span class="nav-text">Members</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/settings" aria-expanded="false">
-                            <i class="icon-settings menu-icon"></i><span class="nav-text">Settings</span>
-                        </a>
-                    </li>
-                    @endif
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf 
-                    <li>
-                        <a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                this.closest('form').submit();" 
-                                aria-expanded="false">
-                            <i class="icon-logout menu-icon text-danger"></i><span class="nav-text text-danger">Logout</span>
-                        </a>
-                    </li>
-                    </form>              
-                </ul>
-            </div>
-        </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
+		<div class="main-panel">
+			@yield('content')
+		</div>
+	</div>
+</div>
+ 
+<!--   Core JS Files   -->
+<script src="{{ asset('assets/js/core/jquery.3.2.1.min.js')}}"></script>
+<script src="{{ asset('assets/js/core/popper.min.js')}}"></script>
+<script src="{{ asset('assets/js/core/bootstrap.min.js')}}"></script>
 
-        <!--**********************************
-            Content body start
-        ***********************************-->
-        <div class="content-body">
+<!-- jQuery UI -->
+<script src="{{ asset('assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')}}"></script>
+<script src="{{ asset('../assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')}}"></script>
 
-            <div class="container-fluid mt-3">
-                @yield('content')
-            </div>
-            <!-- #/ container -->
-        </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
-        
-        
-        <!--**********************************
-            Footer start
-        ***********************************-->
-        <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https:pipsotrade.com">Pipsotrade</a> 2021</p>
-            </div>
-        </div>
-        <!--**********************************
-            Footer end
-        ***********************************-->
-    </div>
-    <!--**********************************
-        Main wrapper end
-    ***********************************-->
+<!-- jQuery Scrollbar -->
+<script src="{{ asset('assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
 
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!--Add the following script at the bottom of the web page (before </body></html>)-->
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/611a8c3d649e0a0a5cd166ac/1fd7r7kgh';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('app_assets/plugins/common/common.min.js') }}" defer></script>
-    <script src="{{ asset('app_assets/js/custom.min.js') }}" defer></script>
-    <script src="{{ asset('app_assets/js/settings.js') }}" defer></script>
-    <script src="{{ asset('app_assets/js/gleek.js') }}" defer></script>
-    <script src="{{ asset('app_assets/js/styleSwitcher.js') }}" defer></script>
-    <!-- Chartjs -->
-    <script src="{{ asset('app_assets/plugins/chart.js/Chart.bundle.min.js') }}" defer></script>
-    <!-- Circle progress -->
-    <script src="{{ asset('app_assets/plugins/circle-progress/circle-progress.min.js') }}" defer></script>
-    <!-- Datamap -->
-    <script src="{{ asset('app_assets/plugins/d3v3/index.js') }}" defer></script>
-    <script src="{{ asset('app_assets/plugins/topojson/topojson.min.js') }}" defer></script>
-    <script src="{{ asset('app_assets/plugins/datamaps/datamaps.world.min.js') }}" defer></script>
-    <!-- Morrisjs -->
-    <script src="{{ asset('app_assets/plugins/raphael/raphael.min.js') }}" defer></script>
-    <script src="{{ asset('app_assets/plugins/morris/morris.min.js') }}" defer></script>
-    <!-- Pignose Calender -->
-    <script src="{{ asset('app_assets/plugins/moment/moment.min.js') }}" defer></script>
-    <script src="{{ asset('app_assets/plugins/pg-calendar/js/pignose.calendar.min.js') }}" defer></script>
-    <!-- ChartistJS -->
-    <script src="{{ asset('app_assets/plugins/chartist/js/chartist.min.js') }}" defer></script>
-    <script src="{{ asset('app_assets/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js') }}" defer></script>
+<!-- Moment JS -->
+<script src="{{ asset('assets/js/plugin/moment/moment.min.js')}}"></script>
 
-    <script src="{{ asset('app_assets/js/dashboard/dashboard-1.js') }}" defer></script>
+<!-- Chart JS -->
+<script src="{{ asset('assets/js/plugin/chart.js/chart.min.js')}}"></script>
 
-    <script src="{{ asset('app_assets/plugins/jquery-steps/build/jquery.steps.min.js') }}"></script>
-    <script src="{{ asset('app_assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('app_assets/js/plugins-init/jquery-steps-init.js') }}"></script>
+<!-- jQuery Sparkline -->
+<script src="{{ asset('assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')}}"></script>
+
+<!-- Chart Circle -->
+<script src="{{ asset('assets/js/plugin/chart-circle/circles.min.js')}}"></script>
+
+<!-- Datatables -->
+<script src="{{ asset('assets/js/plugin/datatables/datatables.min.js')}}"></script>
+
+<!-- Bootstrap Notify -->
+<script src="{{ asset('assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')}}"></script>
+
+<!-- Bootstrap Toggle -->
+<script src="{{ asset('assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js')}}"></script>
+
+<!-- jQuery Vector Maps -->
+<script src="{{ asset('assets/js/plugin/jqvmap/jquery.vmap.min.js')}}"></script>
+<script src="{{ asset('assets/js/plugin/jqvmap/maps/jquery.vmap.world.js')}}"></script>
+
+
+<!-- Sweet Alert -->
+<script src="{{ asset('assets/js/plugin/sweetalert/sweetalert.min.js')}}"></script>
+
+<!-- Azzara JS -->
+<script src="{{ asset('assets/js/ready.min.js')}}"></script>
 
 </body>
-
 </html>

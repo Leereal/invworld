@@ -1,37 +1,43 @@
 @extends('layouts.sidebar')
-
 @section('content')
-<div class="row">
-    <div class="col-lg-4 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="media align-items-center mb-4">
-                    <img class="mr-3" src="{{ asset('app_assets/images/user/form-user.png')}}" width="80" height="80" alt="">
-                    <div class="media-body">
-                        <h3 class="mb-0">{{Auth::user()->username}}</h3>
-                    </div>
-                </div>
-                <h4>About Me</h4>
-                <p class="text-muted">I joined Pipsotrade {{Auth::user()->created_at}}</p>
-                <ul class="card-profile__info">
-                    <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>{{Auth::user()->cellphone}}</span></li>
-                    <li><strong class="text-dark mr-4">Email</strong> <span>{{Auth::user()->email}}</span></li>
-                </ul>
-            </div>
-        </div>  
-    </div>
-    <div class="col-lg-8 col-xl-9">
-        <div class="card">
-            <div class="card-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend"><span class="input-group-text">Referral Link</span>
-                    </div>
-                    <input type="text" id="reflink" value="{{Request::root().'/register/'.Auth::user()->username}}"  class="form-control">
-                    <div class="input-group-append"><span class="input-group-text" onclick="copyLink()"><a href="">Copy</a></span>
-                    </div>
-                </div>
-            </div>
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">My Profile</h4>
         </div>
+    </div>
+    <div class="row col-12">
+        <div class="col-lg-4 col-xl-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="media align-items-center mb-4">
+                        <img class="mr-3" src="{{ asset('assets/img/profile.png')}}" width="80" height="80" alt="">
+                        <div class="media-body">
+                            <h3 class="mb-0">{{Auth::user()->username}}</h3>
+                        </div>
+                    </div>
+                    <h4>About Me</h4>
+                    <p class="text-muted">Started: {{Auth::user()->created_at}}</p>
+                    <ul class="card-profile__info">
+                        <li class="mb-1"><strong class="text-dark mr-4">Mobile</strong> <span>{{Auth::user()->cellphone}}</span></li>
+                        <li><strong class="text-dark mr-4">Email</strong> <span>{{Auth::user()->email}}</span></li>
+                    </ul>
+                </div>
+            </div>  
+        </div>
+        <div class="col-lg-8 col-xl-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend"><span class="input-group-text">Referral Link</span>
+                        </div>
+                        <input type="text" id="reflink" value="{{Request::root().'/register/'.Auth::user()->username}}"  class="form-control">
+                        <div class="input-group-append"><span class="input-group-text" onclick="copyLink()"><a href="">Copy</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
     </div>
     <script>
@@ -52,3 +58,4 @@
     </script>
 </div>
 @endsection
+

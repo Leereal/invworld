@@ -18,8 +18,8 @@ class PlanSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         // Truncate the table.
         DB::table('plans')->truncate();
-        Plan::create(['name'=>'GET 23','interest'=>'23','period'=>'7']);
-        // Plan::create(['name'=>'10 Trading Days','interest'=>'60','period'=>'14']);
+        Plan::create(['name'=>'WEEKLY','interest'=>'20','period'=>'7']);
+        Plan::create(['name'=>'MONTHLY','interest'=>'100','period'=>'31']);
         // Plan::create(['name'=>'20 Trading Days','interest'=>'120','period'=>'30']);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

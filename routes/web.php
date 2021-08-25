@@ -25,7 +25,7 @@ Route::get('/comingsoon', function () {
 });
 
 Route::get('/', function () {
-    return view('index');
+    return view('auth.register');
 });
 
 Auth::routes();

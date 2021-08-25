@@ -1,29 +1,33 @@
 @extends('layouts.sidebar')
-
 @section('content')
-<div class="row">
-    @if(session()->has('message'))
-        <div class="alert alert-success text-center">
-            {{ session()->get('message') }}
+<div class="content">
+    <div class="page-inner">
+        <div class="page-header">
+            <h4 class="page-title">Dashboard</h4>
         </div>
-    @endif
-    @if (isset($errors) && count($errors) > 0)
-        <div class="alert alert-danger text-center">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif    
-    <div class="col-sm-12">
-        <div class="card">
+    </div>
+    <div class="row col-12">
+        @if(session()->has('message'))
+            <div class="alert alert-success text-center">
+                {{ session()->get('message') }}
+            </div>
+        @endif
+        @if (isset($errors) && count($errors) > 0)
+            <div class="alert alert-danger text-center">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif 
+        <div class="card col-12">
             <div class="card-body">
                 <div class="card-title">
                     <h4>Send Your Deposit First</h4>
                 </div>
                 <form method="POST" action="/deposit" enctype="multipart/form-data"> 
-                {{ csrf_field() }}           
+                    {{ csrf_field() }}           
                     <div class="col-12 flex-column justify-content-center align-items-center">
                         <div class="media-body">
                             <ul class="list-group">
@@ -66,3 +70,4 @@
     </div>
 </div>
 @endsection
+
