@@ -159,7 +159,7 @@
 										</a>
 									</li>
                                     <li>
-										<a href="#">
+										<a href="/withdrawal-history">
 											<span class="sub-item">Withdrawals</span>
 										</a>
 									</li>

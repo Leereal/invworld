@@ -26,9 +26,20 @@ class WithdrawalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function pending()
+    {
+        //Get Investments
+        $withdrawals = Auth::user()->withdrawals()->where('status','=',2)->get();
+
+        return view('pendingwithdrawals',['withdrawals'=>$withdrawals]); 
+    }
+
     public function index()
     {
-        //
+        //Get Investments
+        $withdrawals = Auth::user()->withdrawals()->get();
+
+        return view('mywithdrawals',['withdrawals'=>$withdrawals]); 
     }
 
     /**
@@ -51,9 +62,9 @@ class WithdrawalController extends Controller
     {
         $request->validate([            
             'amount'            => 'required|max:10|between:0,99.99', 
-            'bank_id' => 'required|string',
+            'bank' => 'required|integer',
             'account' => 'string|required',
-            'investment'     => 'required|integer',               
+            'investment'     => 'required|integer',              
         ]);
         //Take balance and due date from investments
         $investment     = Investment::where('id',$request->investment)->first();
@@ -128,7 +139,7 @@ class WithdrawalController extends Controller
     public function show(Request $request)
     {   
         $banks = Bank::all();
-        return view('withdraw',['bank_details'=>$banks]);
+        return view('withdraw',['banks'=>$banks,'investment'=>$request->investment]);
          
     }
 
