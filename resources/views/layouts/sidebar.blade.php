@@ -19,6 +19,17 @@
 			}
 		});
 	</script>
+	<!-- Smartsupp Live Chat script -->
+	<script type="text/javascript">
+		var _smartsupp = _smartsupp || {};
+		_smartsupp.key = '95441f728b21479be031ec980c864ef9d499d267';
+		window.smartsupp||(function(d) {
+		var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+		s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+		c.type='text/javascript';c.charset='utf-8';c.async=true;
+		c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+		})(document);
+	</script>
     <!-- CSS Files -->
 	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css')}}">
 	<link rel="stylesheet" href="{{ asset('assets/css/azzara.min.css')}}">   
