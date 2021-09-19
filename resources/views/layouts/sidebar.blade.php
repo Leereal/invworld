@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <title>{{ config('app.name', 'Deriv-Invest') }}</title>
+    <title>{{ config('app.name', 'INVEXWORLD') }}</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/image" sizes="16x16" href="{{ asset('assets/images/logo.png')}}">
     <!-- Fonts and icons -->
@@ -28,7 +28,7 @@
 		<!--
 			Tip 1: You can change the background color of the main header using: data-background-color="blue | purple | light-blue | green | orange | red"
 		-->
-		<div class="main-header" data-background-color="orange">
+		<div class="main-header" data-background-color="green">
 			<!-- Logo Header -->
 			<div class="logo-header">
 				
