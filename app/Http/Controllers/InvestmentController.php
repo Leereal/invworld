@@ -211,7 +211,7 @@ class InvestmentController extends Controller
                 }
                 return redirect('/investments');
             }
-            elseif($reinvestment->status == 1 && $reinvestment->profit > 0 && $reinvestment->profit < 20 ){
+            elseif($reinvestment->status == 1 && $reinvestment->profit > 0 && $reinvestment->profit < 10 ){
                 //Top up
                 try {
                     DB::beginTransaction();
@@ -236,7 +236,7 @@ class InvestmentController extends Controller
                 return redirect('/investments');
 
             }
-            elseif($reinvestment->status == 1 && $reinvestment->profit > 0 && $reinvestment->profit >= 20 ){
+            elseif($reinvestment->status == 1 && $reinvestment->profit > 0 && $reinvestment->profit >= 10 ){
                 $new_profit = $reinvestment->plan->interest / 100 * $reinvestment->balance;
                 $new_balance = $reinvestment->balance + $new_profit; 
                 //Reinvest
